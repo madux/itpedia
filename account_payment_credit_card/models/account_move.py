@@ -19,9 +19,7 @@ class AccountMove(models.Model):
                     result.append({
                         'name': move_line.name,
                         'ref': move_line.ref,
-                        'partner_id':
-                            move.journal_id.partner_id.id or
-                            move_line.partner_id.id or False,
+                        'partner_id':  move.journal_id.partner_id.id or move_line.partner_id.id or False,
                         'journal_id': move_line.journal_id.id,
                         'account_id': move_line.account_id.id,
                         'debit': move_line.credit,
@@ -32,7 +30,8 @@ class AccountMove(models.Model):
                     })
                 # Check result list
                 if result:
+
                     # Create new move lines
                     for vals in result:
-                        self.env['account.move.line'].create(vals)
+                        self.env['account.move.line'].create(vals) 
         return super(AccountMove, self).post(invoice=invoice)
